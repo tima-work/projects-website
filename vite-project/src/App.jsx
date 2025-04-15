@@ -50,6 +50,26 @@ import culturelink_image6 from './assets/culturelink_pictures/image6.jpg';
 
 
 
+import helloworld_image1 from './assets/helloworld_pictures/image1.jpg';
+import helloworld_image2 from './assets/helloworld_pictures/image2.jpg';
+import helloworld_image3 from './assets/helloworld_pictures/image3.jpg';
+import helloworld_image4 from './assets/helloworld_pictures/image4.jpg';
+import helloworld_image5 from './assets/helloworld_pictures/image5.jpg';
+import helloworld_image6 from './assets/helloworld_pictures/image6.jpg';
+
+
+
+
+import zoo_bazaar_image1 from './assets/zoo_bazaar_pictures/image1.png';
+import zoo_bazaar_image2 from './assets/zoo_bazaar_pictures/image2.png';
+import zoo_bazaar_image3 from './assets/zoo_bazaar_pictures/image3.png';
+import zoo_bazaar_image4 from './assets/zoo_bazaar_pictures/image4.png';
+import zoo_bazaar_image5 from './assets/zoo_bazaar_pictures/image5.png';
+import zoo_bazaar_image6 from './assets/zoo_bazaar_pictures/image6.png';
+
+
+
+
 import language_image1 from './assets/map_of_language_pictures/image1.jpg';
 import language_image2 from './assets/map_of_language_pictures/image2.jpg';
 import language_image3 from './assets/map_of_language_pictures/image3.jpg';
@@ -60,6 +80,7 @@ import Footer from './components/Footer'
 import DarkModeToggle from './components/DarkModeToggle'
 import SquigglyTimeline from './components/SquigglyTimeLine';
 import SquigglySVG from './components/SquigglySVG';
+import ImageModal from './components/ImageModal';
 
 
 
@@ -67,23 +88,19 @@ function App() {
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [headerHeight, setHeaderHeight] = useState(0)
-  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false)
+  //const [selectedImage, setSelectedImage] = useState(null);
+  const [imageInitialIndex, setImageInitialIndex] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const openImageModal = (image) => {
-    setSelectedImage(image);
-    setIsImageModalOpen(true);
-  };
 
   const closeImageModal = () => {
     setIsImageModalOpen(false);
-    setSelectedImage(null);
+    setSelectedProject(null);
   };
 
   const handleHeaderToggle = (isCollapsed, height) => {
@@ -93,11 +110,31 @@ function App() {
 
   const projects = [
     {
+      id: 1,
+      title: "HelloWorld",
+      description: "App for mobile phones that aims to help people to get more information about different cultures, traditions, cuisines etc. The main way it's done is by posts, which can be discussed in the comments, and flashcards",
+      technologies: ["Flutter", "Dart"],
+      type: "apk",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/culturelink" }],
+      downloadLink: "/downloads/culturelink.apk",
+      images: [
+        helloworld_image1,
+        helloworld_image2,
+        helloworld_image3,
+        helloworld_image4,
+        helloworld_image5,
+        helloworld_image6
+      ],
+      date: "April, 2025",
+      progressOrder: 7
+    },
+    {
+      id: 2,
       title: "CultureLink",
       description: "App for mobile phones that aims to help people to get more information about different cultures, traditions, cuisines etc. The main way it's done is by posts, which can be discussed in the comments, and flashcards",
       technologies: ["Flutter", "Dart"],
       type: "apk",
-      githubLink: "https://github.com/tima-work/culturelink",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/culturelink" }],
       downloadLink: "/downloads/culturelink.apk",
       images: [
         culturelink_image1,
@@ -108,14 +145,15 @@ function App() {
         culturelink_image6
       ],
       date: "February, 2025",
-      progressOrder: 5
+      progressOrder: 6
     },
     {
+      id: 3,
       title: "Reminder",
       description: "The service that aims to help people with Alzheimer's disease to justify the issues these people face in day-to-day life with note-taking, automatic task management and meal planning. The system also provides caretaker and relatives an easy way to follow the action of the person with dementia",
       technologies: ["Java", "React", "MySQL", "JWT token", "JPA", "Docker", "Cypress", "REST API", "CI/CD", "Vite", "SonarQube", "Jira", "Tailwind"],
       type: "website",
-      githubLink: "https://github.com/tima-work/reminder-backend",
+      githubLinks: [{ name: "GitHub (backend)", link: "https://github.com/tima-work/reminder-backend" }, { name: "Github (frontend)", link: "https://github.com/tima-work/reminder-frontend" }, { name: "GitHub (documentation)", link: "https://github.com/tima-work/reminder-documentation" }],
       liveLink: "https://reminder-frontend-six.vercel.app/",
       images: [
         reminder_image1,
@@ -126,14 +164,15 @@ function App() {
         reminder_image6
       ],
       date: "October, 2024",
-      progressOrder: 4
+      progressOrder: 5
     },
     {
+      id: 4,
       title: "MinfulLens",
       description: "Web system created in order to enhance the rationality and mindfulness by having the vocabulary of the most popular biases, helpful theories and methods, useful sources and nice exercises. The project also has the report system and a forum for discussing the hottest takes on rationality",
       technologies: ["ASP.NET", "MSSQL", "HTML", "CSS", "JavaScript", "C#"],
       type: "website",
-      githubLink: "https://github.com/tima-work/mindfullens",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/mindfullens" }],
       liveLink: "https://i544392.luna.fhict.nl",
       images: [
         mindfulness_image1,
@@ -143,15 +182,35 @@ function App() {
         mindfulness_image5,
         mindfulness_image6
       ],
-      date: "April, 2024",
+      date: "June, 2024",
+      progressOrder: 4
+    },
+    {
+      id: 5,
+      title: "Zoo Bazaar",
+      description: "App for mobile phones that aims to help people to get more information about different cultures, traditions, cuisines etc. The main way it's done is by posts, which can be discussed in the comments, and flashcards",
+      technologies: ["Flutter", "Dart"],
+      type: "apk",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/culturelink" }],
+      downloadLink: "/downloads/culturelink.apk",
+      images: [
+        zoo_bazaar_image1,
+        zoo_bazaar_image2,
+        zoo_bazaar_image3,
+        zoo_bazaar_image4,
+        zoo_bazaar_image5,
+        zoo_bazaar_image6
+      ],
+      date: "March, 2024",
       progressOrder: 3
     },
     {
+      id: 6,
       title: "Student housing",
       description: "Desktop app oriented on students giving them an opportunity to register in a room, view the announcements manage tasks, search for people and complain anonymously",
       technologies: ["C#", "WinForms"],
       type: "exe",
-      githubLink: "https://github.com/tima-work/student_housing",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/student_housing" }],
       downloadLink: "/downloads/StudentHousing.exe",
       images: [
         housing_image1,
@@ -165,11 +224,12 @@ function App() {
       progressOrder: 2
     },
     {
+      id: 7,
       title: "Pizzeria",
       description: "A simple app for the pizza shop that covers the needs of clients making it possible for them to place and track an order. It also has features tailored for cashiers making it easy for them to see and process the orders",
       technologies: ["Flask", "Python", "Arduino"],
       type: "website",
-      githubLink: "https://github.com/tima-work/pizzeria-project",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/pizzeria-project" }],
       liveLink: "https://pizzeria-project-production.up.railway.app/",
       images: [
         pizza_image1,
@@ -183,11 +243,12 @@ function App() {
       progressOrder: 1
     },
     {
+      id: 8,
       title: "Map of Language",
       description: "The side project created especially for learning languages by providing the clear structure and shallow learning curve with dividing program into themes and further into units. Another feature present is testing and practicing the words for sealing the knowledge",
       technologies: ["Kivy", "Buildozer", "Google TTS"],
       type: "exe",
-      githubLink: "https://github.com/tima-work/map-of-language",
+      githubLinks: [{ name: "GitHub", link: "https://github.com/tima-work/map-of-language" }],
       downloadLink: "/downloads/map_of_language.apk",
       images: [
         language_image1,
@@ -201,6 +262,15 @@ function App() {
       progressOrder: 0
     }
   ];
+
+  const [selectedProject, setSelectedProject] = useState(null);
+
+
+  const openImageModal = (id, currentImageIndex) => {
+    setSelectedProject(projects.find(project => project.id === id));
+    setImageInitialIndex(currentImageIndex);
+    setIsImageModalOpen(true);
+  };
 
   // Sort projects by progressOrder to create a chain of progression
   const sortedProjects = projects.sort((a, b) => b.progressOrder - a.progressOrder);
@@ -221,7 +291,7 @@ function App() {
       <div className="w-full transition-all duration-500 ease-in-out"
         style={{ paddingTop: `${headerHeight + 64}px` }}>
         {/* Dark Mode Toggle */}
-        <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+        <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} headerHeight={headerHeight} />
 
         {/* Hero Section */}
         <div className="container mx-auto px-4 py-16 text-center">
@@ -270,7 +340,7 @@ function App() {
                   </div>
                 </div>
                 <div className="w-full md:w-4/6 flex justify-center">
-                  <ProjectCard {...project} isDarkMode={isDarkMode} />
+                  <ProjectCard {...project} isDarkMode={isDarkMode} imageModalOpenFunction={openImageModal} />
                 </div>
               </motion.div>
 
@@ -295,19 +365,19 @@ function App() {
 
         {/* Project Modal - Kept the same as original */}
         <AnimatePresence>
-          {selectedProject && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
-              onClick={() => setSelectedProject(null)}
-            >
-              {/* Modal content remains the same as in the original code */}
-            </motion.div>
-          )}
+          
         </AnimatePresence>
       </div>
+
+
+      {isImageModalOpen && selectedProject && (
+        <ImageModal
+          isDarkMode={isDarkMode}
+          onClose={closeImageModal}
+          initialIndex={imageInitialIndex}
+          images={selectedProject.images}
+        />
+      )}
     </div>
 
     // <>

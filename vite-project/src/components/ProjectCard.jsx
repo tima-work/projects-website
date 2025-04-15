@@ -2,33 +2,25 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     GithubIcon,
-    ExternalLink,
-    Download,
+    Maximize2,
     ChevronLeft,
-    ChevronRight,
-    Maximize2
+    ChevronRight
 } from 'lucide-react';
 import ImageModal from "./ImageModal";
 
 export default function ProjectCard({
+    id,
     title,
     description,
     technologies,
-    githubLink,
+    githubLinks,
     images,
-    type,
-    liveLink = null,
-    downloadLink = null,
-    isDarkMode
+    isDarkMode,
+    imageModalOpenFunction
 }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
-    const openModal = (index) => {
-        setCurrentImageIndex(index);
-        setIsModalOpen(true);
-    };
 
     const imageVariants = {
         enter: (direction) => ({
@@ -70,14 +62,17 @@ export default function ProjectCard({
         setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
     };
 
+    function openImageModal() {
+        imageModalOpenFunction(id, currentImageIndex);
+    }
+
     return (
-        <>
             <div className={`${isDarkMode ? 'bg-gray-800 text-white hover:shadow-[0_0_100px_rgba(34,197,94,0.9)]' : 'bg-white text-black hover:shadow-[0_0_100px_rgba(255,154,38,0.9)]'} 
                 shadow-2xl
                 rounded-2xl overflow-hidden w-full h-[700px] flex flex-col transition-shadow duration-500`}>
                 <div className="h-[400px] w-full overflow-hidden relative">
                     <AnimatePresence 
-                        mode="popLayout" // Changed from "wait" to "popLayout"
+                        mode="popLayout"
                         custom={direction}
                     >
                         <motion.img
@@ -85,7 +80,7 @@ export default function ProjectCard({
                             src={images[currentImageIndex]}
                             alt={`${title} project main screenshot`}
                             className="w-full h-full object-cover cursor-pointer absolute top-0 left-0"
-                            onClick={() => openModal(currentImageIndex)}
+                            onClick={openImageModal}
                             variants={imageVariants}
                             initial="enter"
                             animate="center"
@@ -93,7 +88,7 @@ export default function ProjectCard({
                             custom={direction}
                         />
                     </AnimatePresence>
-                    <div className="absolute top-4 right-4 cursor-pointer hover:scale-110 bg-black/50 rounded-full p-2" onClick={() => openModal(currentImageIndex)}>
+                    <div className="absolute top-4 right-4 cursor-pointer hover:scale-110 bg-black/50 rounded-full p-2" onClick={openImageModal}>
                         <Maximize2 className="text-white" size={20} />
                     </div>
                     {images.length > 1 && (
@@ -117,7 +112,6 @@ export default function ProjectCard({
                         </>
                     )}
                 </div>
-                {/* Rest of the component remains the same */}
                 <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-xl font-bold mb-2 text-left">{title}</h3>
                     <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'} mb-4 text-left`}>{description}</p>
@@ -139,55 +133,22 @@ export default function ProjectCard({
                         </div>
                     </div>
 
-                    <div className="flex items-center space-x-4 mt-auto">
-                        <a
-                            href={githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center ${isDarkMode
-                                ? 'text-gray-300 hover:text-blue-400'
-                                : 'text-gray-700 hover:text-blue-600'}`}
-                        >
-                            <GithubIcon className="mr-2" /> GitHub
-                        </a>
-
-                        {type === 'website' && liveLink && (
+                    <div className="flex items-center space-x-4 mt-auto flex-wrap gap-y-2">
+                        {githubLinks.map((item, index) => (
                             <a
-                                href={liveLink}
+                                key={index}
+                                href={item.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`flex items-center ${isDarkMode
                                     ? 'text-gray-300 hover:text-blue-400'
                                     : 'text-gray-700 hover:text-blue-600'}`}
                             >
-                                <ExternalLink className="mr-2" /> Live Site
+                                <GithubIcon className="mr-2" /> {item.name || "GitHub"}
                             </a>
-                        )}
-
-                        {(type === 'apk' || type === 'exe') && downloadLink && (
-                            <a
-                                href={downloadLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`flex items-center ${isDarkMode
-                                    ? 'text-gray-300 hover:text-blue-400'
-                                    : 'text-gray-700 hover:text-blue-600'}`}
-                            >
-                                <Download className="mr-2" /> Download
-                            </a>
-                        )}
+                        ))}
                     </div>
                 </div>
             </div>
-
-            {isModalOpen && (
-                <ImageModal
-                    images={images}
-                    initialIndex={currentImageIndex}
-                    onClose={() => setIsModalOpen(false)}
-                    isDarkMode={isDarkMode}
-                />
-            )}
-        </>
     );
 }
