@@ -6,7 +6,8 @@ import {
     ChevronLeft,
     ChevronRight
 } from 'lucide-react';
-import ImageModal from "./ImageModal";
+import TechnologyBubble from "./TechnologyBubble";
+import GitHubLink from "./GitHubLink";
 
 export default function ProjectCard({
     id,
@@ -120,32 +121,14 @@ export default function ProjectCard({
                         <h4 className="font-semibold mb-2 text-left">Technologies:</h4>
                         <div className="flex flex-wrap gap-3">
                             {technologies.map((tech, index) => (
-                                <span
-                                    key={index}
-                                    className={`${isDarkMode
-                                        ? 'bg-blue-800 text-blue-200'
-                                        : 'bg-blue-100 text-blue-800'} 
-                                        text-base font-semibold px-3 py-1 rounded-full`}
-                                >
-                                    {tech}
-                                </span>
+                                <TechnologyBubble index={index} tech={tech} isDarkMode={isDarkMode}/>
                             ))}
                         </div>
                     </div>
 
                     <div className="flex items-center space-x-4 mt-auto flex-wrap gap-y-2">
                         {githubLinks.map((item, index) => (
-                            <a
-                                key={index}
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`flex items-center ${isDarkMode
-                                    ? 'text-gray-300 hover:text-blue-400'
-                                    : 'text-gray-700 hover:text-blue-600'}`}
-                            >
-                                <GithubIcon className="mr-2" /> {item.name || "GitHub"}
-                            </a>
+                            <GitHubLink link={item.link} name={item.name} isDarkMode={isDarkMode} />
                         ))}
                     </div>
                 </div>

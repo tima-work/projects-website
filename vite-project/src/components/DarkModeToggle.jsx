@@ -63,23 +63,23 @@ export default function DarkModeToggle({ isDarkMode, toggleDarkMode, headerHeigh
         // </div>
         <motion.div
             onClick={toggleDarkMode}
-            initial={false}
+            initial={{ y: headerHeight + 16 }}  // Set initial to match animate
             animate={{ y: headerHeight + 16 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className={`fixed top-4 right-4 z-50 w-20 h-10 rounded-full cursor-pointer p-1
-                ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}
-            `}
+        ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}
+    `}
         >
-            <motion.div 
-                initial={false}
+            <motion.div
+                initial={{ x: isDarkMode ? 40 : 0 }}  // Set initial to match animate
                 animate={{ x: isDarkMode ? 40 : 0 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 20 }}
                 className={`w-8 h-8 rounded-full flex items-center justify-center mt-1
-                    absolute top-0 
-                    ${isDarkMode 
-                        ? 'bg-blue-500 text-white' 
+            absolute top-0 
+            ${isDarkMode
+                        ? 'bg-blue-500 text-white'
                         : 'bg-yellow-500 text-gray-900'}
-                `}
+        `}
             >
                 {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
             </motion.div>

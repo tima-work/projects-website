@@ -183,14 +183,21 @@ import {
     Phone,
     Download,
     ChevronDown,
-    ChevronUp
+    ChevronUp,
+    HomeIcon,
+    InfoIcon,
+    PhoneIcon
 } from 'lucide-react';
 import my_photo from '../assets/my-photo.png';
+import { useNavigate } from 'react-router'
+import HeaderNavItem from './HeaderNavItem';
 
 export default function Footer({ isDarkMode, onToggle }) {
     const CV_DOWNLOAD_LINK = '/your-cv-filename.pdf';
     const [isCollapsed, setIsCollapsed] = useState(false);
     const headerRef = useRef(null);
+    const navigate = useNavigate();
+
 
 
     // Calculate and report header height when collapsed state changes
@@ -231,42 +238,13 @@ export default function Footer({ isDarkMode, onToggle }) {
                 ${isDarkMode
                         ? 'bg-gradient-to-br from-gray-900 to-purple-900 font-["Silkscreen"] text-gray-100'
                         : 'bg-gradient-to-br from-[#d9f2ff] to-[#c2e9ff] font-[Saira]'
-                    } py-16 px-4 md:px-12 transition-colors duration-300 relative
+                    } py-4 px-4 md:px-12 transition-colors duration-300 relative
             `}>
-                <div className="absolute inset-0 opacity-10 overflow-hidden -z-10">
-                    {isDarkMode ? (
-                        // Dark mode pattern: Matrix-like code pattern
-                        <div className="absolute inset-0 grid grid-cols-8 grid-rows-12">
-                            {Array.from({ length: 96 }).map((_, index) => (
-                                <div key={index} className="flex items-center justify-center text-2xl text-green-400 select-none">
-                                    {['01', '10', '001', '101', '010'][Math.floor(Math.random() * 5)]}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        // Light mode pattern: Geometric shapes
-                        <div className="absolute inset-0">
-                            {Array.from({ length: 20 }).map((_, index) => (
-                                <div
-                                    key={index}
-                                    className={`
-                                        absolute w-16 h-16 rounded-lg opacity-20
-                                        ${['bg-blue-400', 'bg-purple-400', 'bg-indigo-400'][Math.floor(Math.random() * 3)]}
-                                    `}
-                                    style={{
-                                        top: `${Math.random() * 100}%`,
-                                        left: `${Math.random() * 100}%`,
-                                        transform: `rotate(${Math.random() * 360}deg)`,
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    )}
-                </div>
-                <div className="container mx-auto grid md:grid-cols-3 gap-8">
+
+                <div className="flex flex-row justify-between gap-8 w-full">
                     {/* Personal Info Section */}
                     <div className="flex flex-row items-center gap-4">
-                        <div className={`w-28 h-28 rounded-full overflow-hidden border-4 
+                        <div className={`w-44 h-44 rounded-full overflow-hidden border-4 
                             shadow-lg mb-4 ${isDarkMode ? "border-[#189c03]" : "border-black"}`}>
                             <img
                                 src={my_photo}
@@ -290,7 +268,7 @@ export default function Footer({ isDarkMode, onToggle }) {
                     </div>
 
                     {/* Social and Contact Links */}
-                    <div className="flex flex-col items-center">
+                    {/* <div className="flex flex-col items-center">
                         <h3 className={`text-xl font-semibold mb-6 ${isDarkMode ? "text-gray-300" : "text-black"}`}>Get in Touch</h3>
                         <div className="flex space-x-6">
                             <a
@@ -346,10 +324,11 @@ export default function Footer({ isDarkMode, onToggle }) {
                                 <Phone size={28} />
                             </a>
                         </div>
-                    </div>
+                    </div> */}
+
 
                     {/* CV Download Section */}
-                    <div className="flex flex-col items-center">
+                    {/* <div className="flex flex-col items-center">
                         <h3 className="text-xl font-semibold mb-6">Check my CV for more details</h3>
                         <a
                             href={CV_DOWNLOAD_LINK}
@@ -364,6 +343,12 @@ export default function Footer({ isDarkMode, onToggle }) {
                         >
                             <Download className={`mr-2 ${isDarkMode ? "text-blue-100" : "text-blue-800"}`} /> <span className={`${isDarkMode ? "text-blue-100" : "text-blue-800"}`}>Download CV</span>
                         </a>
+                    </div> */}
+
+                    <div className="flex flex-row justify-center gap-8 content-center items-center">
+                        <HeaderNavItem name={"Home"} icon={<HomeIcon />} onClick={() => navigate("/home")} />
+                        <HeaderNavItem name={"Resume"} icon={<InfoIcon />} onClick={() => navigate("/cv")} />
+                        <HeaderNavItem name={"Contact"} icon={<PhoneIcon />} onClick={() => window.alert("Hello")} />
                     </div>
                 </div>
             </header>
