@@ -81,6 +81,7 @@ import Layout from '../components/Layout';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { ArrowUp, ArrowUpIcon } from 'lucide-react';
 import ProjectRow from '../components/ProjectRow';
+import MyButton from '../components/MyButton';
 
 
 
@@ -311,9 +312,9 @@ export default function HomePage() {
               ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}
                             >
                                 <div className="flex flex-col justify-center gap-4"> */}
-                                    {/* <h3 className={`text-4xl font-semibold animate-shimmer ${isDarkMode ? "text-[#189c03] font-[Silkscreen]" : "text-transparent bg-gradient-to-r from-[#6a11cb] via-[#2575fc] to-[#00f0ff] dark:from-[#8e2de2] dark:via-[#4a00e0] dark:to-[#00f0ff] bg-clip-text"}`}
+                        {/* <h3 className={`text-4xl font-semibold animate-shimmer ${isDarkMode ? "text-[#189c03] font-[Silkscreen]" : "text-transparent bg-gradient-to-r from-[#6a11cb] via-[#2575fc] to-[#00f0ff] dark:from-[#8e2de2] dark:via-[#4a00e0] dark:to-[#00f0ff] bg-clip-text"}`}
                 > */}
-                                    {/* <h3 className={`text-4xl font-semibold ${isDarkMode ? "text-[#189c03] font-[Silkscreen]" : "text-black font-[Saira]"}`}
+                        {/* <h3 className={`text-4xl font-semibold ${isDarkMode ? "text-[#189c03] font-[Silkscreen]" : "text-black font-[Saira]"}`}
                                     >
                                         {project.date}
                                     </h3>
@@ -337,17 +338,14 @@ export default function HomePage() {
 
                 <div className="flex justify-center pb-16 mt-20">
                     <motion.div
-                        onClick={scrollToTop}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className={`px-6 py-3 rounded-xl shadow-2xl transform cursor-pointer transition-all duration-300 flex flex-row justify-center gap-2
-                            ${isDarkMode
-                                ? "bg-[#0f7200] hover:bg-[#158f00] text-white font-[Silkscreen]"
-                                : "bg-blue-300 hover:bg-blue-400 text-black font-[Saira]"}`}
                     >
-                        Go to the top
-                        {<ArrowUp />}
+                        <MyButton onClick={scrollToTop} isDarkMode={isDarkMode}>
+                            Go to the top
+                            {<ArrowUp />}
+                        </MyButton>
                     </motion.div>
                 </div>
             </div>
