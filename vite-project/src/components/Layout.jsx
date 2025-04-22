@@ -113,6 +113,7 @@ export default function Layout({ children }) {
         <ContactMePopup
           isOpen={showContactPopup}
           onClose={() => setShowContactPopup(false)}
+          isDarkMode={isDarkMode}
         />
       </div>
     </div>
