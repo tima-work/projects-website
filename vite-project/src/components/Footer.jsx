@@ -48,12 +48,12 @@ export default function Footer({ isDarkMode, onToggle, openContactPopup }) {
                 ${isDarkMode
                         ? 'bg-gradient-to-br from-gray-900 to-purple-900 font-["Silkscreen"] text-gray-100'
                         : 'bg-gradient-to-br from-[#d9f2ff] to-[#c2e9ff] font-[Saira]'
-                    } py-4 px-4 md:px-12 transition-colors duration-300 relative
+                    } py-4 transition-colors duration-300 relative
             `}>
 
                 <div className="flex flex-col lg:flex-row justify-between gap-8 w-full">
                     {/* Personal Info Section */}
-                    <div className="flex flex-row items-center gap-4">
+                    <div className="flex flex-row items-center gap-4 px-4 lg:px-12">
                         <div className={`w-36 h-36 lg:w-44 lg:h-44 rounded-full overflow-hidden border-4 
                             shadow-lg mb-4 ${isDarkMode ? "border-[#189c03]" : "border-black"}`}>
                             <img
@@ -78,7 +78,7 @@ export default function Footer({ isDarkMode, onToggle, openContactPopup }) {
                     </div>
 
 
-                    <div className="flex flex-row justify-evenly gap-4 content-center items-center w-full lg:w-auto lg:justify-center py-2">
+                    <div className="flex flex-row justify-evenly content-center items-center w-full lg:w-auto lg:justify-center py-2">
                         <HeaderNavItem name={"Home"} icon={<HomeIcon />} onClick={() => navigate("/")} isDarkMode={isDarkMode} />
                         <HeaderNavItem name={"Resume"} icon={<UserCircle />} onClick={() => navigate("/cv")} isDarkMode={isDarkMode} />
                         <HeaderNavItem name={"Contact"} icon={<Mail />} onClick={openContactPopup} isDarkMode={isDarkMode} />

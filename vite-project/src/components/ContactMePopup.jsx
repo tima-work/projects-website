@@ -23,7 +23,7 @@ export default function ContactMePopup({ isOpen, onClose, isDarkMode }) {
         >
             <div
                 className={`${isDarkMode ? 'bg-gray-800 text-gray-200' : 'bg-white text-gray-900'} 
-                rounded-lg p-6 shadow-xl max-w-md w-full transition-colors duration-300`}
+                rounded-lg p-6 shadow-xl max-w-xs w-full transition-colors duration-300`}
                 onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the popup content
             >
                 <div className="flex flex-col space-y-4">

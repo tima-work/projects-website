@@ -79,11 +79,10 @@ import SquigglySVG from '../components/SquigglySVG';
 import ImageModal from '../components/ImageModal';
 import Layout from '../components/Layout';
 import { useDarkMode } from '../contexts/DarkModeContext';
-import { ArrowUp, ArrowUpIcon } from 'lucide-react';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import ProjectRow from '../components/ProjectRow';
 import MyButton from '../components/MyButton';
 import ImageModal2 from '../components/ImageModal2';
-import FlippableProjectRow from '../components/FlippableProjectRow';
 
 
 
@@ -92,7 +91,6 @@ export default function HomePage() {
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const [imageInitialIndex, setImageInitialIndex] = useState(0);
     const { isDarkMode } = useDarkMode();
-    const [useFlippableCards, setUseFlippableCards] = useState(false);
 
 
     const closeImageModal = () => {
@@ -103,6 +101,13 @@ export default function HomePage() {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    const scrollToBottom = () => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
             behavior: 'smooth'
         });
     };
@@ -272,7 +277,7 @@ export default function HomePage() {
     };
 
     // Sort projects by progressOrder to create a chain of progression
-    const sortedProjects = projects.sort((a, b) => a.progressOrder - b.progressOrder);
+    const sortedProjects = projects.sort((a, b) => b.progressOrder - a.progressOrder);
 
 
 
@@ -300,18 +305,29 @@ export default function HomePage() {
                 </motion.p>
             </div>
 
-            <div className='flex justify-center items-center content-center'>
-                <input type='checkbox' defaultChecked={useFlippableCards} onChange={({target}) => {setUseFlippableCards(target.checked); console.log(target);}} value={"Use flippable cards"} className='w-6 h-6' />
-                <p className='text-xl'>Use flippable cards</p>
-            </div>
 
             <div className="container mx-auto px-4 pb-16 relative">
+
+                <div className="flex justify-center pb-16 mt-20">
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <MyButton onClick={scrollToBottom} isDarkMode={isDarkMode}>
+                            Go to the oldest projects
+                            {<ArrowDown />}
+                        </MyButton>
+                    </motion.div>
+                </div>
+
+
                 {sortedProjects.map((project, index) => (
                     <div key={project.title}>
 
                         {/* <ProjectRow index={index} project={project} isDarkMode={isDarkMode} openImageModal={openImageModal} /> */}
                         {/* <FlippableProjectRow index={index} project={project} isDarkMode={isDarkMode} openImageModal={openImageModal} /> */}
-                        {useFlippableCards ? <FlippableProjectRow index={index} project={project} isDarkMode={isDarkMode} openImageModal={openImageModal} /> : <ProjectRow index={index} project={project} isDarkMode={isDarkMode} openImageModal={openImageModal} />}
+                        <ProjectRow index={index} project={project} isDarkMode={isDarkMode} openImageModal={openImageModal} />
 
                         {/* Add squiggly SVG between elements except the last one */}
                         {index !== sortedProjects.length - 1 && (
@@ -329,7 +345,7 @@ export default function HomePage() {
                         viewport={{ once: true }}
                     >
                         <MyButton onClick={scrollToTop} isDarkMode={isDarkMode}>
-                            Go to the top
+                            Go to the most recent projects
                             {<ArrowUp />}
                         </MyButton>
                     </motion.div>
@@ -344,7 +360,7 @@ export default function HomePage() {
                 //     initialIndex={imageInitialIndex}
                 //     images={selectedProject.images}
                 // />
-                <ImageModal2 
+                <ImageModal2
                     isDarkMode={isDarkMode}
                     onClose={closeImageModal}
                     initialIndex={imageInitialIndex}
