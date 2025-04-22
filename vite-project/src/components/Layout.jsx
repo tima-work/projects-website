@@ -74,11 +74,13 @@ import { useState } from "react";
 import Footer from "./Footer";
 import DarkModeToggle from "./DarkModeToggle";
 import { useDarkMode } from "../contexts/DarkModeContext";
+import ContactMePopup from "./ContactMePopup";
 
 
 
 export default function Layout({ children }) {
-  const {isDarkMode, toggleDarkMode} = useDarkMode();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const [showContactPopup, setShowContactPopup] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
 
 
@@ -88,27 +90,31 @@ export default function Layout({ children }) {
   }
 
   return (
-      <div className={`min-h-screen w-full 
+    <div className={`min-h-screen w-full 
       ${isDarkMode
-          /*? 'bg-gradient-to-b from-[#101828] to-[#14202c] text-gray-100'*/
-          ? 'bg-gray-900'
-          /*: 'bg-gradient-to-br from-[#f0f4f8] via-[#e6eaf0] to-[#d1d9e6] text-gray-900'*/
-          : 'bg-[#fff7f2]'
-        // : 'bg-[#efefef]'
-        } 
+        /*? 'bg-gradient-to-b from-[#101828] to-[#14202c] text-gray-100'*/
+        ? 'bg-gray-900'
+        /*: 'bg-gradient-to-br from-[#f0f4f8] via-[#e6eaf0] to-[#d1d9e6] text-gray-900'*/
+        : 'bg-[#fff7f2]'
+      // : 'bg-[#efefef]'
+      } 
       transition-colors duration-500 ease-in-out`}
-      >
-        <Footer isDarkMode={isDarkMode} onToggle={handleHeaderToggle} />
+    >
+      <Footer isDarkMode={isDarkMode} onToggle={handleHeaderToggle} openContactPopup={() => setShowContactPopup(true)}
+ />
 
-        <div className="w-full transition-all duration-500 ease-in-out"
-          style={{ paddingTop: `${headerHeight + 64}px` }}>
-          {/* Dark Mode Toggle */}
-          <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} headerHeight={headerHeight} />
+      <div className="w-full transition-all duration-500 ease-in-out"
+        style={{ paddingTop: `${headerHeight + 64}px` }}>
+        {/* Dark Mode Toggle */}
+        <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} headerHeight={headerHeight} />
 
-          {children}
+        {children}
 
-
-        </div>
+        <ContactMePopup
+          isOpen={showContactPopup}
+          onClose={() => setShowContactPopup(false)}
+        />
       </div>
+    </div>
   );
 }

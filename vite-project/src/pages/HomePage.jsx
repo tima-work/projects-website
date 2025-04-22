@@ -82,6 +82,7 @@ import { useDarkMode } from '../contexts/DarkModeContext';
 import { ArrowUp, ArrowUpIcon } from 'lucide-react';
 import ProjectRow from '../components/ProjectRow';
 import MyButton from '../components/MyButton';
+import ImageModal2 from '../components/ImageModal2';
 
 
 
@@ -352,7 +353,13 @@ export default function HomePage() {
 
 
             {isImageModalOpen && selectedProject && (
-                <ImageModal
+                // <ImageModal
+                //     isDarkMode={isDarkMode}
+                //     onClose={closeImageModal}
+                //     initialIndex={imageInitialIndex}
+                //     images={selectedProject.images}
+                // />
+                <ImageModal2 
                     isDarkMode={isDarkMode}
                     onClose={closeImageModal}
                     initialIndex={imageInitialIndex}

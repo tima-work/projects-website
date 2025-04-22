@@ -12,7 +12,7 @@ import my_photo from '../assets/my-photo.png';
 import { useNavigate } from 'react-router'
 import HeaderNavItem from './HeaderNavItem';
 
-export default function Footer({ isDarkMode, onToggle }) {
+export default function Footer({ isDarkMode, onToggle, openContactPopup }) {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const headerRef = useRef(null);
     const navigate = useNavigate();
@@ -81,7 +81,7 @@ export default function Footer({ isDarkMode, onToggle }) {
                     <div className="flex flex-row justify-evenly gap-4 content-center items-center w-full lg:w-auto lg:justify-center">
                         <HeaderNavItem name={"Home"} icon={<HomeIcon />} onClick={() => navigate("/")} isDarkMode={isDarkMode} />
                         <HeaderNavItem name={"Resume"} icon={<UserCircle />} onClick={() => navigate("/cv")} isDarkMode={isDarkMode} />
-                        <HeaderNavItem name={"Contact"} icon={<Mail />} onClick={() => window.alert("Hello")} isDarkMode={isDarkMode} />
+                        <HeaderNavItem name={"Contact"} icon={<Mail />} onClick={openContactPopup} isDarkMode={isDarkMode} />
                     </div>
                 </div>
             </header>

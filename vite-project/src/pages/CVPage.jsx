@@ -3,6 +3,7 @@ import { useDarkMode } from "../contexts/DarkModeContext"; // Assuming this is w
 import MyButton from "../components/MyButton"; // Assuming MyButton is a custom component
 import { DownloadIcon, FileText, ImageDownIcon } from "lucide-react";
 import DownloadButton from "../components/DownloadButton";
+import { Button, Badge } from "@material-tailwind/react";
 
 export default function CVPage() {
     const { isDarkMode } = useDarkMode();

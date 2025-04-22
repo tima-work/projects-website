@@ -89,6 +89,7 @@ import {
 } from "react-router";
 import HomePage from './pages/HomePage';
 import CVPage from './pages/CVPage';
+import LongDialog from './pages/LongDialog';
 
 
 
@@ -99,6 +100,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/cv" element={<CVPage />} />
+        <Route path="/contact" element={<LongDialog />} />
       </Routes>
     </Router>
   )

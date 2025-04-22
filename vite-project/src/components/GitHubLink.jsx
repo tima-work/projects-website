@@ -6,9 +6,9 @@ export default function GitHubLink({ link, name = null, isDarkMode }) {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center ${isDarkMode
-                ? 'text-gray-300 hover:text-blue-400'
-                : 'text-gray-700 hover:text-blue-600'}`}
+            className={`flex items-center text-[#646cff] font-medium ${isDarkMode
+                ? 'hover:text-blue-400'
+                : 'hover:text-blue-600'}`}
         >
             <GithubIcon className="mr-2" /> {name || "GitHub"}
         </a>
