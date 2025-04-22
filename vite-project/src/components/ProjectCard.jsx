@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    GithubIcon,
     Maximize2,
     ChevronLeft,
     ChevronRight
