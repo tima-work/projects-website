@@ -70,7 +70,7 @@
 //   )
 // }
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import DarkModeToggle from "./DarkModeToggle";
 import { useDarkMode } from "../contexts/DarkModeContext";
@@ -84,13 +84,25 @@ export default function Layout({ children }) {
   const [headerHeight, setHeaderHeight] = useState(0);
 
 
+  useEffect(() => {
+    const setRealVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+  
+    setRealVh();
+    window.addEventListener('resize', setRealVh);
+    return () => window.removeEventListener('resize', setRealVh);
+  }, []);
+
+
 
   const handleHeaderToggle = (isCollapsed, height) => {
     setHeaderHeight(isCollapsed ? 0 : height)
   }
 
   return (
-    <div className={`min-h-screen w-full 
+    <div className={`min-h-[calc(100*var(--vh,1vh)] w-full 
       ${isDarkMode
         /*? 'bg-gradient-to-b from-[#101828] to-[#14202c] text-gray-100'*/
         ? 'bg-gray-900'

@@ -78,7 +78,7 @@ export default function Footer({ isDarkMode, onToggle, openContactPopup }) {
                     </div>
 
 
-                    <div className="flex flex-row justify-evenly gap-4 content-center items-center w-full lg:w-auto lg:justify-center">
+                    <div className="flex flex-row justify-evenly gap-4 content-center items-center w-full lg:w-auto lg:justify-center py-2">
                         <HeaderNavItem name={"Home"} icon={<HomeIcon />} onClick={() => navigate("/")} isDarkMode={isDarkMode} />
                         <HeaderNavItem name={"Resume"} icon={<UserCircle />} onClick={() => navigate("/cv")} isDarkMode={isDarkMode} />
                         <HeaderNavItem name={"Contact"} icon={<Mail />} onClick={openContactPopup} isDarkMode={isDarkMode} />
