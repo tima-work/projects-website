@@ -131,8 +131,8 @@ export default function SquigglySVG({
 
       {/* Main SVG with glow */}
       <svg
-        width="40%"
-        height="auto"
+        width="40vw"  // or use something like "24rem"
+  height="auto"
         viewBox="0 0 897 242"
         preserveAspectRatio="none"
         className="absolute top-0 left-1/4 overflow-visible"

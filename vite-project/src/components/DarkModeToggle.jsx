@@ -118,7 +118,7 @@ export default function DarkModeToggle({ isDarkMode, toggleDarkMode, headerHeigh
     return (
         <div
             onClick={toggleDarkMode}
-            className={`fixed right-4 z-50 w-20 h-10 rounded-full cursor-pointer p-1
+            className={`fixed right-[3%] z-50 w-20 h-10 rounded-full cursor-pointer p-1
         ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}
       `}
             style={{
