@@ -208,6 +208,8 @@
 
 "use client"
 
+import { useEffect, useState } from "react"
+
 export default function SquigglySVG({
   direction = "right",
   isDarkMode = false,
@@ -218,24 +220,35 @@ export default function SquigglySVG({
 }) {
   // Generate unique IDs for our filters
   const filterId = `squiggly-filter-${Math.floor(Math.random() * 10000)}`
+  
+  // Detect iOS device
+  const [isIOS, setIsIOS] = useState(false)
+  
+  useEffect(() => {
+    // Check if the device is iOS
+    const userAgent = window.navigator.userAgent.toLowerCase()
+    setIsIOS(/iphone|ipad|ipod/.test(userAgent))
+  }, [])
 
   return (
     <div className="w-full h-full relative">
       {/* Shadow element - only shown in light mode */}
       {!isDarkMode && (
         <svg
-          className="w-full h-auto max-w-[600px] mx-auto overflow-visible"
+          width="100%"
+          height="100%"
           viewBox="0 0 897 242"
           preserveAspectRatio="none"
+          className="absolute top-0 left-0 w-full h-full"
           style={{
-            position: "absolute",
             top: direction === "left" ? "-20px" : "20px",
             left: direction === "left" ? "-10px" : "10px",
-            right: 0,
             transform: direction === "left" ? "scaleX(-1)" : "none",
             opacity: shadowOpacity,
             filter: `blur(${shadowBlur}px)`,
             zIndex: 0,
+            maxWidth: isIOS ? "90%" : "40%",
+            marginLeft: isIOS ? "5%" : "30%",
           }}
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -265,16 +278,18 @@ export default function SquigglySVG({
 
       {/* Main SVG with glow */}
       <svg
-        className="w-full h-auto max-w-[600px] mx-auto overflow-visible"
+        width="100%"
+        height="100%"
         viewBox="0 0 897 242"
         preserveAspectRatio="none"
+        className="absolute top-0 left-0 w-full h-full"
         style={{
-          position: "absolute",
           top: 0,
           left: 0,
-          right: 0,
           transform: direction === "left" ? "scaleX(-1)" : "none",
           zIndex: 1,
+          maxWidth: isIOS ? "90%" : "40%",
+          marginLeft: isIOS ? "5%" : "30%",
         }}
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -320,6 +335,11 @@ export default function SquigglySVG({
           />
         </g>
       </svg>
+      
+      {/* Debug info - uncomment to see device info */}
+      {/* <div className="absolute bottom-0 right-0 bg-black text-white p-2 text-xs z-10">
+        {isIOS ? "iOS Device" : "Non-iOS Device"}
+      </div> */}
     </div>
   )
 }
